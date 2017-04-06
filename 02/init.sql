@@ -36,8 +36,8 @@ CREATE TABLE Nest (
 );
 
 CREATE TABLE Sichtung (
-  storchId INTEGER,
-  nestId   INTEGER,
+  storchId INTEGER REFERENCES Storch ON DELETE CASCADE ,
+  nestId   INTEGER REFERENCES Nest,
   datum    DATE,
   PRIMARY KEY (storchId, nestId, datum)
 );
