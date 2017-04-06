@@ -20,7 +20,7 @@ CREATE TABLE StorchenArt (
 
 CREATE TABLE Storch (
   id               SERIAL PRIMARY KEY,
-  geschlect        CHAR(1) CHECK (geschlect IN ('m', 'w')),
+  geschlecht       CHAR(1) CHECK (geschlecht IN ('m', 'w')),
   storchenArtNameL VARCHAR(255) REFERENCES StorchenArt ON DELETE SET NULL
 );
 
@@ -36,9 +36,19 @@ CREATE TABLE Nest (
 );
 
 CREATE TABLE Sichtung (
-  storchId INTEGER REFERENCES Storch ON DELETE CASCADE ,
+  storchId INTEGER REFERENCES Storch ON DELETE CASCADE,
   nestId   INTEGER REFERENCES Nest,
   datum    DATE,
   PRIMARY KEY (storchId, nestId, datum)
 );
 
+
+INSERT INTO Nest (plz) VALUES ('12459');
+INSERT INTO StorchenGattung (nameL, nameD) VALUES ('S', 'Tolle Storchengattung');
+INSERT INTO StorchenArt (nameL, nameD, storchenGattungNameL) VALUES ('D', 'Tolle Storchenart', 'S');
+INSERT INTO Storch (geschlecht, storchenArtNameL) VALUES ('m', 'D');
+INSERT INTO Storch (geschlecht, storchenArtNameL) VALUES ('w', 'D');
+INSERT INTO Storch (geschlecht, storchenArtNameL) VALUES ('m', 'D');
+INSERT INTO Sichtung (storchId, nestId, datum) VALUES (1, 1, now());
+INSERT INTO StorchFamilie (elternStorchId, kindStorchId) VALUES (1, 3);
+INSERT INTO StorchFamilie (elternStorchId, kindStorchId) VALUES (2, 3);
